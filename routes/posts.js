@@ -24,7 +24,7 @@ router.post('/', (req, res) => {
     file.mv(filepath)
 
     const post = req.body;
-    posts.push({ ...post, path: `./images/${filename}` ,id: uuidv4() });
+    posts.push({ ...post, path: `/images/${filename}` ,id: uuidv4() });
 
     res.send(`Post added`);
 });
