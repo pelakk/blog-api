@@ -31,6 +31,8 @@ app.use(function (req, res, next) {
     next();
 });
 
+app.use('/images', express.static('uploads'))
+
 app.use('/posts', postsRoutes);
 
 app.use('/comments', commentsRoutes);

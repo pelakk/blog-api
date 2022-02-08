@@ -20,7 +20,7 @@ router.post('/', (req, res) => {
 
     const file = req.files.image;
     const filename = file.name;
-    const filepath = 'C:/blogApi/uploads/'+filename;
+    const filepath = './uploads/'+filename;
     file.mv(filepath)
 
     const post = req.body;
