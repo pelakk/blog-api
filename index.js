@@ -11,18 +11,14 @@ app.use(upload());
 
 app.use(bodyParser.json());
 
-// Add headers before the routes are defined
 app.use(function (req, res, next) {
-  // Website you wish to allow to connect
+  // Website allowed to connect
   res.setHeader("Access-Control-Allow-Origin", "http://localhost:3000");
 
-  // Request methods you wish to allow
-  res.setHeader(
-    "Access-Control-Allow-Methods",
-    "GET, POST, OPTIONS, PUT, PATCH, DELETE"
-  );
+  // Request methods
+  res.setHeader("Access-Control-Allow-Methods", "GET, POST");
 
-  // Request headers you wish to allow
+  // Request headers
   res.setHeader(
     "Access-Control-Allow-Headers",
     "X-Requested-With,content-type"
@@ -32,7 +28,6 @@ app.use(function (req, res, next) {
   // to the API (e.g. in case you use sessions)
   res.setHeader("Access-Control-Allow-Credentials", true);
 
-  // Pass to next layer of middleware
   next();
 });
 

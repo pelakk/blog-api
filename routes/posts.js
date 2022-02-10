@@ -1,32 +1,38 @@
 import express from "express";
-import { getAllPosts, getPostById, getPostWithComments } from "../controllers/posts.js";
+import {
+  getAllPosts,
+  getPostById,
+  getPostWithComments,
+} from "../controllers/posts.js";
 import { paginatedResults } from "../controllers/paginatedResults.js";
-import { posts } from '../data/postsList.js';
-import { v4 as uuidv4 } from 'uuid';
+import { posts } from "../data/postsList.js";
+import { v4 as uuidv4 } from "uuid";
 
 const router = express.Router();
 
-router.get('/', paginatedResults(posts), getAllPosts);
+// first 3 functions in another file to make it cleaner
 
-router.get('/:id/comments', getPostWithComments);
+router.get("/", paginatedResults(posts), getAllPosts);
 
-router.get('/:id', getPostById);
+router.get("/:id/comments", getPostWithComments);
 
-router.post('/', (req, res) => {
-    if(!req.body.title || !req.body.content){
-        res.status(400).send('You should provide title and content');
-        return
-    }
+router.get("/:id", getPostById);
 
-    const file = req.files.image;
-    const filename = file.name;
-    const filepath = './uploads/'+filename;
-    file.mv(filepath)
+router.post("/", (req, res) => {
+  if (!req.body.title || !req.body.content) {
+    res.status(400).send("You should provide title and content");
+    return;
+  }
 
-    const post = req.body;
-    posts.push({ ...post, path: `/images/${filename}` ,id: uuidv4() });
+  const file = req.files.image;
+  const filename = file.name;
+  const filepath = "./uploads/" + filename;
+  file.mv(filepath);
 
-    res.send(`Post added`);
+  const post = req.body;
+  posts.push({ ...post, path: `/images/${filename}`, id: uuidv4() });
+
+  res.send(`Post added`);
 });
 
 export default router;
