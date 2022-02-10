@@ -1,5 +1,6 @@
 import express from "express";
 import { comments } from "../data/commentsList.js";
+import { v4 as uuidv4 } from "uuid";
 
 const router = express.Router();
 
@@ -10,7 +11,7 @@ router.post("/", (req, res) => {
   }
 
   const comment = req.body;
-  comments.push({ ...comment });
+  comments.push({ ...comment, id: uuidv4() });
 
   res.send(`Comment added`);
 });
