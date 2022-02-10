@@ -1,14 +1,18 @@
 import express from "express";
-import { getAllComments, createComment, getCommentById } from "../controllers/comments.js";
-import { paginatedResults } from "../controllers/paginatedResults.js";
-import { comments } from '../data/commentsList.js';
+import { comments } from "../data/commentsList.js";
 
 const router = express.Router();
 
-router.get('/', paginatedResults(comments), getAllComments)
+router.post("/", (req, res) => {
+  if (!req.body.email || !req.body.content) {
+    res.status(400).send("You should provide email and content");
+    return;
+  }
 
-router.get('/:id', getCommentById)
+  const comment = req.body;
+  comments.push({ ...comment });
 
-router.post('/', createComment);
+  res.send(`Comment added`);
+});
 
 export default router;
