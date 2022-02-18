@@ -13,10 +13,7 @@ app.use(bodyParser.json());
 
 app.use(function (req, res, next) {
   // Website allowed to connect
-  res.setHeader(
-    "Access-Control-Allow-Origin",
-    "http://blog.dawid-matuszynski.pl/"
-  );
+  res.setHeader("Access-Control-Allow-Origin", "http://dawid-matuszynski.pl/");
 
   // Request methods
   res.setHeader("Access-Control-Allow-Methods", "GET, POST");
