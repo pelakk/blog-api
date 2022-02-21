@@ -2,7 +2,8 @@ import { posts } from "../data/postsList.js";
 import { comments } from "../data/commentsList.js";
 
 export const getAllPosts = (req, res) => {
-  res.json(res.paginatedResults);
+  // res.json(res.paginatedResults);
+  res.send(posts);
 };
 
 // returning posts with matching id
